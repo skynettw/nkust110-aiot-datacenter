@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}樂透號碼預測{% endblock %}
+{% block headmessage %} <h2>保證不準</h2> {% endblock %}
+{% block content %}
+    {% for n in lotto %}
+        <span class="badge bg-primary" style="font-size:20pt;">{{ n }}</span> 
+    {% endfor %}
+{% endblock %}
