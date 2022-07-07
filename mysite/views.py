@@ -12,3 +12,7 @@ def lotto(request):
     random.shuffle(lotto)
     lotto = lotto[:6]
     return render(request, "lotto.html", locals())
+
+def show(request, id):
+    item = News.objects.get(id=id)
+    return render(request, "show.html", locals())
