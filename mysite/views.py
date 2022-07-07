@@ -1,9 +1,10 @@
 from django.shortcuts import render
+from mysite.models import News
 import random
 
 def index(request):
     name = "不分系何老師"
-    
+    news = News.objects.all()
     return render(request, "index.html", locals())
 
 def lotto(request):

@@ -9,4 +9,14 @@
     {% else %}
     陌生人
     {% endif %}
+    <table class="table table-danger table-striped">
+        <tr><td>編號</td><td>新聞標題</td><td>日期</td></tr>
+    {% for item in news %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.pdate }}</td>
+        </tr>
+    {% endfor %}
+    </table>    
 {% endblock %}
