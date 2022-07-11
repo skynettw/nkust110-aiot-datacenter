@@ -20,3 +20,13 @@ def show(request, id):
 def stock(request):
     ct = CompanyType.objects.all()
     return render(request, "stock.html", locals())
+
+def company(request, id):
+    ct = CompanyType.objects.get(id=id)
+    companies = Company.objects.filter(ct=ct)
+    return render(request, "company.html", locals())
+
+def stockinfo(request, id):
+    company = Company.objects.get(id=id)
+    data = StockInfo.objects.filter(company=company).order_by('dateinfo')[:50]
+    return render(request, "stockinfo.html", locals())

@@ -15,6 +15,7 @@ class CompanyType(models.Model):
     def __str__(self):
         return self.name
 
+#預設值只有在資料表中已有記錄的情況下才能夠使用，如果是全新的資料表，就不要使用這個函式
 def get_default_ct():
     return CompanyType.objects.get(id=1).id
 
