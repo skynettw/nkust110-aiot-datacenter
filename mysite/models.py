@@ -10,6 +10,11 @@ class News(models.Model):
     def __str__(self):
         return self.title
 
+class CompanyType(models.Model):
+    name = models.CharField(max_length=50, default="其他")
+    def __str__(self):
+        return self.name
+
 class Company(models.Model):
     code = models.CharField(max_length=10, verbose_name="編碼")
     name = models.CharField(max_length=20, verbose_name="名稱")
