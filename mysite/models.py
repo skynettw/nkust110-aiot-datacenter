@@ -11,11 +11,16 @@ class News(models.Model):
         return self.title
 
 class CompanyType(models.Model):
-    name = models.CharField(max_length=50, default="其他")
+    name = models.CharField(max_length=50, default="其他", verbose_name="類別")
     def __str__(self):
         return self.name
 
+def get_default_ct():
+    return CompanyType.objects.get(id=1).id
+
 class Company(models.Model):
+    ct = models.ForeignKey(CompanyType, default=get_default_ct, 
+                           on_delete=models.CASCADE, verbose_name="類別")
     code = models.CharField(max_length=10, verbose_name="編碼")
     name = models.CharField(max_length=20, verbose_name="名稱")
     def __str__(self):

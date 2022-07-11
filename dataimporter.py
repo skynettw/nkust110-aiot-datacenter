@@ -15,7 +15,7 @@ for row in rows:
                 pdate = row[3],
                 url=row[4])
         rec.save()
-    except:
-        pass
+    except Exception as e:
+        print(e)
     print(row[1])
 print("All done!")

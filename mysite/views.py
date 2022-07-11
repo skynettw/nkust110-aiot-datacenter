@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from mysite.models import News
+from mysite.models import News, Company, CompanyType, StockInfo
 import random
 
 def index(request):
@@ -16,3 +16,7 @@ def lotto(request):
 def show(request, id):
     item = News.objects.get(id=id)
     return render(request, "show.html", locals())
+
+def stock(request):
+    ct = CompanyType.objects.all()
+    return render(request, "stock.html", locals())

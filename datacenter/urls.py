@@ -4,6 +4,7 @@ from mysite import views
 
 urlpatterns = [
     path('show/<int:id>/', views.show),
+    path('stock/', views.stock),
     path('lotto/', views.lotto),
     path('', views.index),
     path('admin/', admin.site.urls),
