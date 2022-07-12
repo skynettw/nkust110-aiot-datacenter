@@ -3,12 +3,14 @@
 {% block title %}這是何老師的網頁{% endblock %}
 {% block headmessage %} <h2>Welcome</h2> {% endblock %}
 {% block content %}
-    Hello
-    {% if name %}
-    {{ name }}
-    {% else %}
-    陌生人
-    {% endif %}
+    <form action="/" method="POST">
+        {% csrf_token %}
+        關鍵字：
+        <input type=text size=20 name="keyword" required>
+        <input type=submit value="查詢">
+    </form>
+    <br>
+    <p class="alert alert-info">以下總共找到{{ count }}篇新聞：</p>
     <table class="table table-warning table-striped">
         <tr><td>編號</td><td>新聞標題</td><td>日期</td></tr>
     {% for item in news %}
