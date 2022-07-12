@@ -2,7 +2,16 @@
 {% block title %}我的股市觀測站{% endblock %}
 {% block headmessage %} <h2>{{ company.name }}</h2> {% endblock %}
 {% block content %}
-<canvas id="myChart" width="400" height="150"></canvas>
+<div class="row">
+    <div class="col">
+        <canvas id="myChart" width="400" height="300"></canvas>
+    </div>
+    <div class="col">
+        {% autoescape off %}
+        {{ plot_div }}
+        {% endautoescape %}
+    </div>
+</div>
 <script>
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
@@ -55,7 +64,7 @@ const myChart = new Chart(ctx, {
     <tr>
         <td>日期</td><td>開盤價</td><td>收盤價</td><td>成交量</td>
     </tr>
-{% for item in data %}
+{% for item in last50 %}
     <tr>
         <td>{{item.dateinfo}}</td>
         <td>{{item.open_price}}</td>

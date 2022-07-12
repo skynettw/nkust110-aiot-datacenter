@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from mysite.models import News, Company, CompanyType, StockInfo
 import random
+from plotly.offline import plot
+import plotly.graph_objs as go
 
 def index(request):
     name = "不分系何老師"
@@ -28,5 +30,11 @@ def company(request, id):
 
 def stockinfo(request, id):
     company = Company.objects.get(id=id)
-    data = StockInfo.objects.filter(company=company).order_by('dateinfo')[:50]
+    data = StockInfo.objects.filter(company=company).order_by('dateinfo')
+    last50 = data[:50]
+    prices = [d.open_price for d in data]
+    dates = [d.dateinfo for d in data]
+    plot_div = plot(
+        [go.Scatter(x=dates, y=prices, mode='lines')], 
+        output_type="div")
     return render(request, "stockinfo.html", locals())
