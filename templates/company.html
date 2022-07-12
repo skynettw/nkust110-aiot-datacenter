@@ -2,12 +2,14 @@
 {% block title %}我的股市觀測站{% endblock %}
 {% block headmessage %} <h2>{{ct.name}}</h2> {% endblock %}
 {% block content %}
-    {% for item in companies %}
-        <a  class="btn btn-sm btn-outline-primary" 
-            href="/stockinfo/{{item.id}}/"
-        >
-            {{item.name}}
-        </a>
-    {% endfor %}
+    <form action="/stockinfo/" method="POST">
+        {% csrf_token %}
+        <select name="comp">
+        {% for item in companies %}
+            <option value="{{item.id}}">{{item.name}}</option>
+        {% endfor %}
+        </select>
+        <input type=submit value="送出">
+    </form>
     <hr>
 {% endblock %}

@@ -28,8 +28,12 @@ def company(request, id):
     companies = Company.objects.filter(ct=ct)
     return render(request, "company.html", locals())
 
-def stockinfo(request, id):
-    company = Company.objects.get(id=id)
+def stockinfo(request, id=1):
+    if request.method=="POST":   #如果是使用表單轉來這個網頁的
+        comp = request.POST.get("comp")
+        company = Company.objects.get(id=comp)
+    else:                        #如果不是使用表單轉來這個網頁，就直接使用參數id來找出公司
+        company = Company.objects.get(id=id)
     data = StockInfo.objects.filter(company=company).order_by('dateinfo')
     last50 = data[:50]
     prices = [d.open_price for d in data]

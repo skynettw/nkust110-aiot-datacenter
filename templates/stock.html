@@ -2,12 +2,18 @@
 {% block title %}我的股市觀測站{% endblock %}
 {% block headmessage %} <h2>我的股市觀測站</h2> {% endblock %}
 {% block content %}
-    {% for item in ct %}
+<center>
+<div class="card"  style="width: 30rem;">
+    <div class="card-body">
+        {% for item in ct %}
         <a  class="btn btn-sm btn-outline-primary" 
             href="/company/{{item.id}}/"
         >
             {{item.name}}
         </a>
     {% endfor %}
+    </div>
+  </div>
+</center>
     <hr>
 {% endblock %}
