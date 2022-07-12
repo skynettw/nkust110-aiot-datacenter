@@ -33,8 +33,9 @@ def stockinfo(request, id):
     data = StockInfo.objects.filter(company=company).order_by('dateinfo')
     last50 = data[:50]
     prices = [d.open_price for d in data]
+    volumes = [d.volume/1000 for d in data]
     dates = [d.dateinfo for d in data]
     plot_div = plot(
-        [go.Scatter(x=dates, y=prices, mode='lines')], 
+        [go.Scatter(x=dates, y=prices, mode='lines'), go.Bar(x=dates, y=volumes)], 
         output_type="div")
     return render(request, "stockinfo.html", locals())
