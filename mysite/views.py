@@ -60,3 +60,7 @@ def chart(request):
         data.append(News.objects.filter(content__contains=keyword.strip()).count())
     
     return render(request, "chart.html", locals())
+
+def jquery_test(request):
+
+    return render(request, "jquery-test.html", locals())

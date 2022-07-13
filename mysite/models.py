@@ -16,11 +16,11 @@ class CompanyType(models.Model):
         return self.name
 
 #預設值只有在資料表中已有記錄的情況下才能夠使用，如果是全新的資料表，就不要使用這個函式
-def get_default_ct():
-    return CompanyType.objects.get(id=1).id
+#def get_default_ct():
+#    return CompanyType.objects.get(id=1).id
 
 class Company(models.Model):
-    ct = models.ForeignKey(CompanyType, default=get_default_ct, 
+    ct = models.ForeignKey(CompanyType, #default=get_default_ct, 
                            on_delete=models.CASCADE, verbose_name="類別")
     code = models.CharField(max_length=10, verbose_name="編碼")
     name = models.CharField(max_length=20, verbose_name="名稱")

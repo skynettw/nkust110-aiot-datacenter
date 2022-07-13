@@ -3,6 +3,7 @@ from django.urls import path
 from mysite import views
 
 urlpatterns = [
+    path('jquery-test/', views.jquery_test),
     path('chart/', views.chart),
     path('show/<int:id>/', views.show),
     path('company/<int:id>/', views.company),
