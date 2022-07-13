@@ -13,13 +13,15 @@
                 var code = $('#code').val();
                 console.log(code);
                 $.ajax({
-
                     url: "http://localhost:8000/api/stock/"+code+"/",
                     success: function(result) {
                         var data="<div style='overflow-y: scroll; height:400px;'><table class='table table-striped'>";
                         data += "<tr><td>日期</td><td>收盤價</td><td>成交量</td></tr>";
                         result['data'].forEach((element) => {
-                            data += "<tr><td>" + element[0]+ "</td><td>" + element[1] + "</td><td>" + element[2] + "</td></tr>";
+                            data += "<tr><td>" + 
+                                element[0]+ "</td><td>" + 
+                                element[1] + "</td><td>" + 
+                                element[2] + "</td></tr>";
                         });
                         data += "</table></div>";
                         $('#target').html(data);

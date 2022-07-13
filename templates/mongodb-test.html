@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}MongoDB Test{% endblock %}
+{% block headmessage %} <h2>MongoDB Test</h2> {% endblock %}
+{% block content %}
+    <input type=text value="France" id="code" required>
+    <a class="btn btn-primary" id="btn1">Load</a>
+    <div id="target">N/A</div>
+
+    <script>
+        $(document).ready(function() {
+            $('#btn1').click(function(event) {
+                var code = $('#code').val();
+                console.log(code);
+                $.ajax({
+                    url: "http://localhost:8000/api/mongodb/"+code+"/",
+                    success: function(result) {
+                        var data="<ul>";
+                        result['data'].forEach((element) => {
+                            data += "<li>" + element + "</li>";
+                        });
+                        data += "</ul>";
+                        $('#target').html(data);
+                    }
+                });
+            });
+
+            
+        });
+    </script>
+
+{% endblock %}

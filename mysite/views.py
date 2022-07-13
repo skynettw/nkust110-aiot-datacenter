@@ -4,6 +4,7 @@ from mysite.models import News, Company, CompanyType, StockInfo
 import random
 from plotly.offline import plot
 import plotly.graph_objs as go
+from pymongo import MongoClient
 
 def index(request):
     if request.method=="POST":
@@ -63,8 +64,10 @@ def chart(request):
     return render(request, "chart.html", locals())
 
 def jquery_test(request):
-
     return render(request, "jquery-test.html", locals())
+
+def mongodb_test(request):
+    return render(request, "mongodb-test.html", locals())
 
 def api_stock(request, code):
     try:
@@ -74,3 +77,16 @@ def api_stock(request, code):
         return JsonResponse({"status":"ok", "data":stock_data})
     except:
         return JsonResponse({"status":"fail"})
+    
+def api_mongodb(request, keyword):
+    conn = MongoClient("mongodb://root:example@localhost:27017/")
+    db = conn.nkust
+    collection = db.news
+
+    place = keyword
+    find_cmd = {"bornplace":{'$regex' : place}}
+    rows = collection.find(find_cmd)
+    data = list()
+    for row in rows:
+        data.append(row['author'])
+    return JsonResponse({'status':'ok', 'data':data})

@@ -4,6 +4,8 @@ from mysite import views
 
 urlpatterns = [
     path('jquery-test/', views.jquery_test),
+    path('mongodb-test/', views.mongodb_test),
+    path('api/mongodb/<str:keyword>/', views.api_mongodb),
     path('api/stock/<str:code>/', views.api_stock),
     path('chart/', views.chart),
     path('show/<int:id>/', views.show),
