@@ -4,6 +4,7 @@ from mysite import views
 
 urlpatterns = [
     path('jquery-test/', views.jquery_test),
+    path('api/stock/<str:code>/', views.api_stock),
     path('chart/', views.chart),
     path('show/<int:id>/', views.show),
     path('company/<int:id>/', views.company),

@@ -3,21 +3,31 @@
 {% block title %}jQuery Test{% endblock %}
 {% block headmessage %} <h2>jQuery Test</h2> {% endblock %}
 {% block content %}
-    <div id="target">Hello</div>
-    <a class="btn btn-primary" id="btn1">Change</a>
+    <input type=text value="1101" id="code" required>
+    <a class="btn btn-primary" id="btn1">Load</a>
+    <div id="target">N/A</div>
 
     <script>
         $(document).ready(function() {
             $('#btn1').click(function(event) {
-                $('#target').html("Hi");
+                var code = $('#code').val();
+                console.log(code);
+                $.ajax({
+
+                    url: "http://localhost:8000/api/stock/"+code+"/",
+                    success: function(result) {
+                        var data="<div style='overflow-y: scroll; height:400px;'><table class='table table-striped'>";
+                        data += "<tr><td>日期</td><td>收盤價</td><td>成交量</td></tr>";
+                        result['data'].forEach((element) => {
+                            data += "<tr><td>" + element[0]+ "</td><td>" + element[1] + "</td><td>" + element[2] + "</td></tr>";
+                        });
+                        data += "</table></div>";
+                        $('#target').html(data);
+                    }
+                });
             });
 
-            $.ajax({
-                url: "http://localhost:8000/",
-                success: function(result) {
-                    $('#target').html(result);
-                }
-            })
+            
         });
     </script>
 

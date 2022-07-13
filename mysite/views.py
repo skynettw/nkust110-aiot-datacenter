@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import JsonResponse, HttpResponse
 from mysite.models import News, Company, CompanyType, StockInfo
 import random
 from plotly.offline import plot
@@ -64,3 +65,12 @@ def chart(request):
 def jquery_test(request):
 
     return render(request, "jquery-test.html", locals())
+
+def api_stock(request, code):
+    try:
+        c = Company.objects.get(code=code)
+        data = StockInfo.objects.filter(company=c)
+        stock_data = [(d.dateinfo.strftime("%Y-%m-%d"), d.close_price, d.volume) for d in data]
+        return JsonResponse({"status":"ok", "data":stock_data})
+    except:
+        return JsonResponse({"status":"fail"})

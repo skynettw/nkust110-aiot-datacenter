@@ -25,7 +25,7 @@ class Company(models.Model):
     code = models.CharField(max_length=10, verbose_name="編碼")
     name = models.CharField(max_length=20, verbose_name="名稱")
     def __str__(self):
-        return self.name
+        return "({},{})".format(self.name, self.code)
     
 class StockInfo(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name="公司名稱")

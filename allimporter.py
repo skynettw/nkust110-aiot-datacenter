@@ -7,7 +7,7 @@ django.setup()
 
 from mysite.models import Company, StockInfo
 
-target = ['1101', '1102']
+target = ['2330', '2357']
 url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20220{}01&stockNo={}"
 urls = list()
 for c in target:
